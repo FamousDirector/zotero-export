@@ -2,7 +2,7 @@ from pyzotero import zotero
 import dropbox
 
 #zotero collection 
-collection_name = 'Unread'
+collection_name = 'Proposal'
 
 storage_path = 'C:\\Users\\james\\Zotero\\storage'
 dropbox_path = '/Share/Literature'
@@ -47,8 +47,7 @@ dbx = dropbox.Dropbox(dropbox_key)
 #upload each file
 for path,name in zip(file_paths,item_filenames):
     with open(path, 'rb') as f:
+        print("Uploading:" +name +" \n")
         name = name.replace(".pdf","") #remove extension to be added later
         sanitized_name = name.translate({ord(c): None for c in '.- //!@#$'}) #remove naughty chars
         dbx.files_upload(f.read(),dropbox_path + '/' + sanitized_name + '.pdf')
-
-print("")
